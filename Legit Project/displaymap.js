@@ -48,7 +48,6 @@ function initMap() {
     //obtaining midpoints for each region
     for (var i = 0; i < regions.length; i++){
       var mat = regions[i];
-      //console.log(mat)
       var latsum = mat[0]["lat"] + mat[1]["lat"] + mat[2]["lat"] + mat[3]["lat"];
       latsum /= 4;
       var lngsum = mat[0]["lng"] + mat[1]["lng"] + mat[2]["lng"] + mat[3]["lng"];
@@ -87,9 +86,7 @@ function initMap() {
       else {
         methodtrans = google.maps.TravelMode.DRIVING;
       }
-      for (var i = 0; i < origins.length; i++){
-        calcTime(destination, origins, i, shapes, methodtrans);
-      }
+      resetMap(destination, origins, shapes, methodtrans);
     }
 
     //code for switching marker on MAP click
@@ -100,9 +97,7 @@ function initMap() {
       marker.position = destination;
       marker.setMap(map);
 
-      for (var i = 0; i < origins.length; i++){
-        calcTime(destination, origins, i, shapes, methodtrans);
-      }
+      resetMap(destination, origins, shapes, methodtrans);
 
     });
 
@@ -157,60 +152,27 @@ function initMap() {
         this.window.close();
         directionsDisplay.setMap(null);
       });
-
-      var color;
-      var matrix = new google.maps.DistanceMatrixService; //Making distance matrix
-      matrix.getDistanceMatrix({
-        origins: [origins[i]],
-        destinations: [destination],
-        travelMode: methodtrans,
-        unitSystem: google.maps.UnitSystem.METRIC,
-      }, function(response, status) { //upon completion
-        if (status == google.maps.DistanceMatrixStatus.OK) {
-          var results = response.rows[0].elements;
-          var destin = response.destinationAddresses[0];
-          times[count] = results[0].duration.text;
-          time = results[0].duration.value; //Goes to location and stores value of seconds into duration variable]
-
-          if(time < 200){
-            color = "#ff0000";
-            colors[count] = color;
-          }
-          else if(time < 350){
-            color = "#66ffff";
-            colors[count] = color;
-          }
-          else if(time < 500){
-            color = "#66ff33";
-            colors[count] = color;
-          }
-          else {
-            color = "#3333cc";
-            colors[count] = color;
-          }
-          shapes[count].setOptions({
-            tempColor: colors[count],
-            fillColor: colors[count],
-            strokeColor: colors[count]
-          });
-          shapes[count].window.setOptions({content: "Time from " + destin + ": " + times[count]})
-          count++;
-        }
-      });
     }
+    resetMap(destination, origins, shapes, methodtrans)
   }
 }
 
-function calcTime(dest, ori, index, shapes, methodtrans){
+function calcTime(dest, ori, index, shapes, methodtrans, times){
   var matrix = new google.maps.DistanceMatrixService;
+  var time;
   matrix.getDistanceMatrix({
     origins: [ori[index]],
     destinations: [dest],
     travelMode: methodtrans,
     unitSystem: google.maps.UnitSystem.METRIC,
-  }, function(response, status) { //upon completion
+  }, function(response, status) {//upon completion
     if (status != google.maps.DistanceMatrixStatus.OK) {
       console.log(status);
+      times[index]=-1;
+      if(calcTimeDone(times)){
+        console.log(times);
+        calcValues(times);
+      }
     }
     if (status == google.maps.DistanceMatrixStatus.OK) {
       var results = response.rows[0].elements;
@@ -219,41 +181,12 @@ function calcTime(dest, ori, index, shapes, methodtrans){
         time = -1
       } else {
         time = results[0].duration.value; //Goes to location and stores value of seconds into duration variable]
+        }
+      times[index]=time;
+      if(calcTimeDone(times)){
+        console.log(times);
+        calcValues(times);
       }
-
-      if (time < 0){
-        color = "#ababab";
-      }
-      else if(time < 200 ){
-        color = "#ff0000";
-      }
-      else if(time < 350){
-        color = "#66ffff";
-      }
-      else if(time < 500){
-        color = "#66ff33";
-      }
-      else {
-        color = "#3333cc";
-      }
-
-      shapes[index].setOptions({
-        tempColor: color,
-        strokeColor: color,
-        fillColor: color
-      });
-      if (time >= 0){
-        shapes[index].window.setOptions({content: "Time from " + destin + ": " + results[0].duration.text});
-      } else {
-        shapes[index].window.setOptions({content: "No route available"});
-      }
-    } else {
-      shapes[index].setOptions({
-        tempColor: "#000000",
-        strokeColor: "#000000",
-        fillColor: "#000000"
-      });
-      shapes[index].window.setOptions({content: status});
     }
   });
 }
@@ -270,7 +203,96 @@ function fieldSubmit(){
       for (var i = 0; i < origins.length; i++){
         calcTime(results[0].geometry.location, origins, i, shapes, methodtrans);
       }
-      console.log("calculated");
+      //console.log("calculated");
     }
   });
+}
+
+  function resetMap(destination, origins, shapes, methodtrans){
+    var timetemp;
+    var times = new Array(80);
+    for (var i = 0; i < origins.length; i++){
+      calcTime(destination, origins, i, shapes, methodtrans, times);
+    }
+  }
+  function calcTimeDone(arr){
+    var count=0;
+    for(var i = 0;i < arr.length;i++){
+      if(arr[i]!=null){
+        count++;
+      }
+    }
+    if(count==arr.length){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  function resetLegend(mintime, maxtime, range){
+    var firstincrement, secondincrement, thirdincrement, fourthincrement;
+    firstincrement = "" + mintime + " to " + (range/4 + mintime) + " minutes";
+    secondincrement = "" + (mintime+ range/4) + " to " + (mintime + range/2) + " minutes";
+    thirdincrement = "" + (mintime + range/2) + " to " + (mintime + range*3/4) + " minutes";
+    fourthincrement = "" + (mintime + range*3/4) + " to " + (mintime + range) + " minutes" ;
+    console.log(firstincrement);
+    console.log(secondincrement);
+    console.log(thirdincrement);
+    console.log(fourthincrement);
+    document.getElementById("first").innerHTML=firstincrement;
+    document.getElementById("second").innerHTML=secondincrement;
+    document.getElementById("third").innerHTML=thirdincrement;
+    document.getElementById("fourth").innerHTML=fourthincrement;
+  }
+  function updateColors(times, mintime, maxtime, range, destins){
+    for(var i = 0; i< times.length; i++){
+      var time = times[i]/60;
+      if (time==undefined || time < 0){
+        color = "#ababab";
+      }
+      else if(time < range/4 + mintime){
+        color = "#ff0000";
+      }
+      else if(time < mintime+range/2){
+        color = "#66ffff";
+      }
+      else if(time < mintime+range*3/4){
+        color = "#66ff33";
+      }
+      else {
+        color = "#3333cc";
+      }
+
+      shapes[i].setOptions({
+        tempColor: color,
+        strokeColor: color,
+        fillColor: color
+      });
+      if (time >= 0){
+        shapes[i].window.setOptions({content: "Time from " + origins[i] + ": " + (time/60) + "minutes"});
+      } else {
+        shapes[i].window.setOptions({content: "No route available"});
+      }
+      shapes[i].window.setOptions({content: status});
+    }
+  }
+function calcValues(times){
+  var mintime, maxtime;
+  for(var i = 0;i<times.length;i++){
+    if(i==0){
+      mintime=times[i];
+      maxtime=times[i];
+    }
+    else if(times[i]<mintime){
+      mintime=times[i];
+    }
+    else if(times[i]>maxtime){
+      maxtime=times[i];
+    }
+  }
+  mintime=mintime/60;
+  maxtime=maxtime/60;
+  range=maxtime-mintime;
+  updateColors(times, mintime, maxtime, range);
+  resetLegend(mintime, maxtime, range);
 }
