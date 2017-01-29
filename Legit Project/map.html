@@ -22,46 +22,52 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    height: 80px;
     overflow: hidden;
-    background-color: #606060;
+    background-color: #8B8B8B;
 }
 li {
     float: left;
 }
 li a {
     display: block;
-    color: white;
+    color: pink;
     text-align: center;
-    padding: 14px 16px;
+    padding: 26px 16px;
+    text-decoration: none;
     font-family: 'Trebuchet MS',Helvetica,sans-serif;
+    font-size: 25px;
 }
 li a:hover {
-    background-color: #111;
+    background-color: #44403F;
 }
 </style>
 </head>
 
 
   <body onload="initMap()">
+
     <ul>
-      <li><a class="active" href="map.html">Home</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><img src="applogo.png"/> </li>
+      <li><a class="active" href="map.html">HOME</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="about.html">ABOUT US</a></li>
+
     </ul>
-
-
-
+    <br>
     <div class = "second">
       <div class = "left">
-        <div class = "box box1">   <div>
+        <div class = "box box1">
+        <p style="font-family: 'Trebuchet MS',Helvetica,sans-serif; color: #43808C; font-size: 24px;">
               Destination Address:
               <input type="text" id = "address">
-          </div> </div>
+            </div>
         <div class = "box box2">
            <button onclick="fieldSubmit()"> Place Marker </button> </div>
       </div>
       <div class = "right">
-        <p style="font-family: 'Trebuchet MS',Helvetica,sans-serif;"> Select a mode of transportation:<select onchange="initMap()" id="transportation"></select>
+        <p style="font-family: 'Trebuchet MS',Helvetica,sans-serif; color: white; font-size: 24px;"> Select a mode of transportation:
+          <br> <select onchange="initMap()" id="transportation"></select>
         </p>
       </div>
     </div>
@@ -73,6 +79,7 @@ li a:hover {
          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-KMiLCLYouSxpDAShEiLr9BNG1uN5TfI&callback=initMap"
        async defer></script></div>
       <div class = "key key">
+      <center> <p style="font-family: 'Trebuchet MS',Helvetica,sans-serif; color: white; font-size: 24px;"> Key </center>
       <p>
         <div style="width: 20px; height: 20px; background: #ff0000; display: inline-block;"></div>
         <span id="first" style="font-family: 'Trebuchet MS', Helvetica, sans-serif">= 3 1/3 minutes or less</span>

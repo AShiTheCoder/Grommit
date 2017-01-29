@@ -1,28 +1,32 @@
 .second {
+
   position: relative;
   margin-top: 0;
 }
 
 .left{
+  border-radius: 25px;
   position:absolute;
   height:400px;
   width: 500px;
   top:0;
   left:0;
-  border: 1px solid blue
+  border: 5px solid #BBC3C4;
 }
 
 .right{
   position: absolute;
+  border-radius: 25px;
+  background-color: #96DCE5;
   height: 400px;
   width: calc(100% - 500px);
   top: 0;
-  left: 500px;
-  border: 1px solid red;
+  left: 520px;
+
 
 }
 .box {
-  background: gray;
+
   position: relative;
   height: 200px;
   width: 500px;
@@ -37,7 +41,7 @@
 }
 
 .third {
-  background: green;
+  background: #8B8B8B;
   position: relative;
   height: 300px;
   width: 100%;
@@ -50,13 +54,12 @@
   width: 30%;
   top: 0;
   left: calc(100% - 30%);
-  border: 1px solid blue
+
 }
 .map{
   position: relative;
   height: 300px;
   width: 70%;
   top: 0;
-  border: 1px solid red
 
 }
