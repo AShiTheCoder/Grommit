@@ -104,9 +104,7 @@ function initMap() {
     google.maps.event.addListener(map, "click", function(e){
       destination = e.latLng;
       console.log(destination.lat() + ", " + destination.lng());
-
-      marker.position = destination;
-      marker.setMap(map);
+      placeDest(destination);
 
       resetMap(destination, origins, shapes, methodtrans);
 
@@ -166,10 +164,7 @@ function initMap() {
       google.maps.event.addListener(shapes[i], "click", function(e){
         destination = e.latLng;
         // console.log(destination.lat() + ", " + destination.lng());
-
-        marker.position = destination;
-        marker.setMap(map);
-
+        placeDest(destination);
         resetMap(destination, origins, shapes, methodtrans);
 
       });
@@ -218,8 +213,7 @@ function fieldSubmit(){
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode({address: input.value}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-      marker.position = results[0].geometry.location;
-      marker.setMap(map);
+      placeDest(results[0].geometry.location);
 
       for (var i = 0; i < origins.length; i++){
         calcTime(results[0].geometry.location, origins, i, shapes, methodtrans);
@@ -236,6 +230,7 @@ function fieldSubmit(){
       calcTime(destination, origins, i, shapes, methodtrans, times);
     }
   }
+
   function calcTimeDone(arr){
     var count=0;
     for(var i = 0;i < arr.length;i++){
@@ -327,4 +322,17 @@ function calcValues(times){
   range=maxtime-mintime;
   updateColors(times, mintime, maxtime, range);
   resetLegend(mintime, maxtime, range);
+}
+function placeDest(dest){
+  console.log(dest);
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({location: dest}, function(results, status) {
+    console.log("function called");
+    if (status == google.maps.GeocoderStatus.OK) {
+      marker.window.setContent(results[0].formatted_address);
+      marker.position = dest;
+      console.log(results[0].formatted_address);
+      marker.setMap(map);
+    }
+  });
 }
