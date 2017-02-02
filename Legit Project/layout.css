@@ -21,7 +21,7 @@
   height: 400px;
   width: calc(100% - 500px);
   top: 0;
-<<<<<<< HEAD
+
   left: 500px;
   border: 1px solid red;
   margin-top: 20px;
@@ -29,10 +29,12 @@
    margin-right: 20px;
    margin-left: 20px;
   background-color: #99CCFF;
-=======
+
   left: 520px;
 
->>>>>>> origin/master
+  left: 520px;
+
+
 
 }
 .box {
