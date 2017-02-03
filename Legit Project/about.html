@@ -1,65 +1,57 @@
 <html>
 <head>
+  <title>Simple Map</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <script src="displaymap.js">
+  </script>
+  <meta charset="utf-8">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      height: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href = "layout.css"/>
 <style>
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    height: 80px;
     overflow: hidden;
-    background-color: #606060;
+    background-color: #8B8B8B;
 }
-
 li {
     float: left;
 }
-
 li a {
     display: block;
-    color: white;
+    color: pink;
     text-align: center;
-    padding: 14px 16px;
+    padding: 26px 16px;
+    text-decoration: none;
     font-family: 'Trebuchet MS',Helvetica,sans-serif;
+    font-size: 25px;
 }
-
 li a:hover {
-    background-color: #111;
+    background-color: #44403F;
 }
 </style>
 </head>
-<body>
 
-<ul>
-  <li><a href="map.html">Home</a></li>
-  <li><a href="contact.html">Contact</a></li>
-  <li><a class="active" href="about.html">About</a></li>
-</ul>
 
-</body>
+  <body onload="initMap()">
 
-  <head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <script src="displaymap.js">
-    </script>
-    <meta charset="utf-8">
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      }
-    </style>
-  </head>
-  <br><br><br>
-<body>
-  <div>
-    <style>
-    div{
-      width: 1300px;
-      height: 500px;
-      background-color: #404040;
-    }
+    <ul>
+      <li><img src="applogo.png"/> </li>
+      <li><a href="map.html">HOME</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+      <li><a class="active"href="about.html">ABOUT US</a></li>
+
+    </ul>
+
 </html>
