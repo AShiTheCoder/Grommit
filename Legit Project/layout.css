@@ -7,10 +7,8 @@
 .left{
   border-radius: 25px;
   position:absolute;
-  height:400px;
-  width: 500px;
-  top:0;
-  left:0px;
+  margin-top:1%;
+  left:71%;
   border: 5px solid #BBC3C4;
 }
 
@@ -18,29 +16,18 @@
   position: absolute;
   border-radius: 25px;
   background-color: #96DCE5;
-  height: 400px;
-  width: calc(100% - 545px);
-  top: 0;
 
-  left: 500px;
-  margin-top: 7px;
+  margin-top: 10%;
    margin-bottom: 20px;
    margin-right: 20px;
    margin-left: 20px;
   background-color: #99CCFF;
 
-  left:520px;
-
-  left: 520px;
-
-
-
-}
+  left:68%;
+}/*
 .box {
 
   position: relative;
-  height: 200px;
-  width: 500px;
 }
 
 .box1 {
@@ -50,14 +37,12 @@
   //top: 101px;
 
 }
-
+*/
 .third {
   background: #8B8B8B;
   position: relative;
   height: 300px;
   width: 100%;
-  top: 440px;
-
 }
 .key{
   position: absolute;
@@ -69,7 +54,7 @@
 }
 .map{
   position: relative;
-  height: 300px;
+  height: 100%;
   width: 70%;
   top: 0;
 

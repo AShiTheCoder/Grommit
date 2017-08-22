@@ -55,29 +55,31 @@ li a:hover {
 
     </ul>
     <br>
-    <div class = "second">
-      <div class = "left">
-        <div class = "box box1">
-        <p style="font-family: 'Trebuchet MS',Helvetica,sans-serif; color: #43808C; font-size: 24px; text-indent:5px;">
-                  Destination Address:
-              <input type="text" id = "address">
-            </div>
-        <div class = "box box2">
-           <button onclick="fieldSubmit()" style="margin-left:7px"> Place Marker </button> </div>
-      </div>
-      <div class = "right">
-        <p style="font-family: 'Trebuchet MS',Helvetica,sans-serif; color: white; font-size: 24px;text-indent:7px;"> Select a mode of transportation:
-          <br> <select onchange="initMap()" id="transportation" style="margin-left:7px"></select>
-        </p>
-      </div>
-    </div>
 
     <div class = "third">
       <div class = "map map">
-         <div id="map" style="width: 920px; height: 500px; border-color: black; border-style: solid"></div>
+         <div id="map" style="width: 97%; height: 215%; border-color: black; border-style: solid"></div>
 
          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-KMiLCLYouSxpDAShEiLr9BNG1uN5TfI&callback=initMap"async defer></script></div>
-      <div class = "key key">
+         <div class = "second">
+          <div class = "left">
+            <div class = "box box1">
+            <p style="margin-bottom:5px; font-family: 'Trebuchet MS',Helvetica,sans-serif; color: #43808C; font-size: 24px; text-indent:5px;">
+                      Start Address:
+                  <input type="text" id = "address"></input>
+                   &nbsp; 
+            </p>
+            </div>
+            <div class = "box box2" style="margin-bottom:20px;">
+               <button onclick="fieldSubmit()" style="margin-left:7px"> Place Marker </button> </div>
+          </div>
+          <div class = "right">
+            <p style="font-family: 'Trebuchet MS',Helvetica,sans-serif; color: white; font-size: 24px;text-indent:7px;"> Select a mode of transportation:
+              <br> <select onchange="initMap()" id="transportation" style="margin-left:7px"></select>
+            </p>
+          </div>
+        </div>
+         <div class = "key key">
       <center> <p style="font-family: 'Trebuchet MS',Helvetica,sans-serif; color: white; font-size: 24px;"> Key </center>
       <p>
         <div style="width: 20px; height: 20px; background: #ff0000; display: inline-block;"></div>
